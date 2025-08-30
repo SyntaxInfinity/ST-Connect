@@ -4,13 +4,13 @@
 
 ---
 
-## 🚀 Problema que resuelve  
+## Problema que resuelve  
 Actualmente, los estudiantes deben acceder al sistema institucional para consultar notas, horarios o evaluaciones, lo que puede resultar poco práctico.  
 **Tu Asistente ST** centraliza toda esta información en una app intuitiva, rápida y con notificaciones inteligentes.  
 
 ---
 
-## 📲 Funcionalidades principales  
+## Funcionalidades principales  
 
 ### Pantallas iniciales  
 - **Horario (vista principal)**: Visualización clara de asignaturas, horarios, salas y profesores.  
@@ -22,7 +22,7 @@ Actualmente, los estudiantes deben acceder al sistema institucional para consult
 
 ---
 
-## 🧭 Navegación entre pantallas  
+## Navegación entre pantallas  
 - Uso de **Intents** para moverse entre:  
   - Pantalla principal  
   - Horario  
@@ -38,7 +38,7 @@ Actualmente, los estudiantes deben acceder al sistema institucional para consult
 
 ---
 
-## 🛠️ Componentes de Android utilizados  
+## Componentes de Android utilizados  
 
 - **Activities** → cada vista principal (Horario, Calificaciones, Evaluaciones, Notificaciones).  
 - **Fragments** → para dividir y organizar la vista de horario.  
@@ -50,7 +50,7 @@ Actualmente, los estudiantes deben acceder al sistema institucional para consult
 
 ---
 
-## 📂 Datos manejados  
+## Datos manejados  
 
 - **Internos:**  
   - Horario de clases  
@@ -64,14 +64,14 @@ Actualmente, los estudiantes deben acceder al sistema institucional para consult
 
 ---
 
-## ⚠️ Riesgos y desafíos iniciales  
+## Riesgos y desafíos iniciales  
 - Crear pantallas claras e intuitivas para el usuario.  
 - Manejo de notificaciones en segundo plano.  
 - Sincronización con información institucional externa (si se habilita).  
 
 ---
 
-## 📅 Hitos de avance  
+## Hitos de avance  
 
 - **Semana 1:** Crear estructura base del proyecto en Android con Activities y navegación mediante Intents.  
 - **Semana 2:** Implementar pantallas de horario y calificaciones con datos de prueba.  
@@ -79,7 +79,7 @@ Actualmente, los estudiantes deben acceder al sistema institucional para consult
 
 ---
 
-## 👨‍💻 Tecnologías utilizadas  
+##  Tecnologías utilizadas  
 - **Lenguaje:** Java (Android Studio)  
 - **Framework:** Android SDK  
 - **Diseño:** XML para interfaces  
@@ -87,10 +87,6 @@ Actualmente, los estudiantes deben acceder al sistema institucional para consult
 
 ---
 
-## 📌 Estado del proyecto  
-📍 *En desarrollo – versión inicial en construcción.*  
+## Estado del proyecto  
+ *En desarrollo*  
 
----
-
-## ✨ Autores  
-Desarrollado por **[Tu Nombre]** – Proyecto académico para estudiantes de **Santo Tomás**.  
