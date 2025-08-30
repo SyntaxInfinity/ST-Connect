@@ -90,3 +90,6 @@ Actualmente, los estudiantes deben acceder al sistema institucional para consult
 ## Estado del proyecto  
  *En desarrollo*  
 
+ ## Integrantes del equipo 
+ Jordan Murillo - Benjamin Ponce
+
