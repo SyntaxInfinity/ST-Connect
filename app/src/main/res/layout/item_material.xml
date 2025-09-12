@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FAFAFA"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:elevation="2dp">
+
+    <!-- Nombre de la materia (cabecera) -->
+    <TextView
+        android:id="@+id/tvMateria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Matemáticas"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <!-- Contenedor de notas (inicialmente oculto) -->
+    <LinearLayout
+        android:id="@+id/containerNotas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:paddingTop="8dp">
+
+        <!-- Ejemplo de nota -->
+        <TextView
+            android:id="@+id/tvNota1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prueba 1: 6.5"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvNota2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prueba 2: 5.8"
+            android:textSize="16sp"
+            android:textColor="#333333" />
+
+    </LinearLayout>
+
+</LinearLayout>
