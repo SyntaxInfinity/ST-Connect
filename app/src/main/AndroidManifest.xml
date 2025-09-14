@@ -17,20 +17,15 @@
             android:label="@string/title_activity_horario"
             android:theme="@style/Theme.StConnect.NoActionBar" />
         <activity
-            android:name=".activity_horario"
-            android:exported="true"
-            android:label="@string/title_activity_horari0"
-            android:theme="@style/Theme.StConnect.NoActionBar" />
-        <activity
-            android:name=".CalificacionesActivity"
+            android:name=".ui.calificaciones.CalificacionesActivity"
             android:exported="true"
             android:label="Calificaciones" />
         <activity
-            android:name=".EvaluacionesActivity"
+            android:name=".ui.evaluaciones.EvaluacionesActivity"
             android:exported="true"
             android:label="Evaluaciones" />
         <activity
-            android:name=".WebActivity"
+            android:name=".ui.aulavirtual.AulaVirtualActivity"
             android:exported="true"
             android:label="Web" />
         <activity
