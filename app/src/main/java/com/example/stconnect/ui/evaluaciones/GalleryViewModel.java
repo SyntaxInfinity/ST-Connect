@@ -1,4 +1,4 @@
-package com.example.stconnect.ui.gallery;
+package com.example.stconnect.ui.evaluaciones;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

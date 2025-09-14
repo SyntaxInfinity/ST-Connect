@@ -1,4 +1,4 @@
-package com.example.stconnect.ui.home;
+package com.example.stconnect.ui.calificaciones;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

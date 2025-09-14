@@ -1,4 +1,4 @@
-package com.example.stconnect.ui.slideshow;
+package com.example.stconnect.ui.aulavirtual;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
