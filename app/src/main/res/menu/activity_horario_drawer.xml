@@ -6,15 +6,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_calificaciones"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="calificaciones" />
+            android:icon="@drawable/baseline_assignment"
+            android:title="Calificaciones" />
         <item
             android:id="@+id/nav_evaluaciones"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="evaluaciones" />
+            android:icon="@drawable/baseline_library_books"
+            android:title="Evaluaciones" />
         <item
             android:id="@+id/nav_web"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/baseline_language"
             android:title="Aula virtual" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/account_circle"
+            android:title="Profile" />
     </group>
 </menu>

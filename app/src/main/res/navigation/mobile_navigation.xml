@@ -22,4 +22,10 @@
         android:name="com.example.stconnect.ui.aulavirtual.AulaVirtualFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_web" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.stconnect.ui.profile.ProfileFragment"
+        android:label="perfil"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
