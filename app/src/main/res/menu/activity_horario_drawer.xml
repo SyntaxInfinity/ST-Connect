@@ -26,7 +26,7 @@
             android:title="Horario" />
         <item
             android:id="@+id/nav_notificaciones"
-            android:icon="@drawable/icono_notificaciones"
+            android:icon="@drawable/outline_add_alert"
             android:title="Notificaciones
 " />
     </group>
