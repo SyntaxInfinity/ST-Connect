@@ -17,18 +17,6 @@
             android:label="@string/title_activity_horario"
             android:theme="@style/Theme.StConnect.NoActionBar" />
         <activity
-            android:name=".ui.calificaciones.CalificacionesActivity"
-            android:exported="true"
-            android:label="Calificaciones" />
-        <activity
-            android:name=".ui.evaluaciones.EvaluacionesActivity"
-            android:exported="true"
-            android:label="Evaluaciones" />
-        <activity
-            android:name=".ui.aulavirtual.AulaVirtualActivity"
-            android:exported="true"
-            android:label="Web" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
