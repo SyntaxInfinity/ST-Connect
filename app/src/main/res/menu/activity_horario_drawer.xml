@@ -20,5 +20,14 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/account_circle"
             android:title="Profile" />
+        <item
+            android:id="@+id/nav_horario"
+            android:icon="@drawable/baseline_calendar_month"
+            android:title="Horario" />
+        <item
+            android:id="@+id/nav_notificaciones"
+            android:icon="@drawable/icono_notificaciones"
+            android:title="Notificaciones
+" />
     </group>
 </menu>

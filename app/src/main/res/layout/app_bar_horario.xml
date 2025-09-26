@@ -15,20 +15,6 @@
         android:layout_marginBottom="16dp"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.StConnect.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#1A3C20"
-            app:popupTheme="@style/Theme.StConnect.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <include layout="@layout/content_horario" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

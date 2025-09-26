@@ -14,22 +14,39 @@ import androidx.fragment.app.Fragment;
 import com.example.stconnect.R;
 
 public class ProfileFragment extends Fragment {
+    private TextView profileName, profileEmail;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        ImageView profileImage = root.findViewById(R.id.profile_image);
-        TextView profileName = root.findViewById(R.id.profile_name);
-        TextView profileEmail = root.findViewById(R.id.profile_email);
-
-        profileName.setText("Alex Ponce");
-        profileEmail.setText("alex.ponce@ejemplo.com");
-
-        return root;
+    public ProfileFragment() {
     }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initViews(view);
+
+        loadProfileData();
+    }
+
+    private void initViews(View view) {
+        profileName = view.findViewById(R.id.profile_name);
+        profileEmail = view.findViewById(R.id.profile_email);
+    }
+
+    private void loadProfileData() {
+
+        String nombre = "Juan Pérez";
+        String email = "juan.perez@correo.com";
+
+        profileName.setText(nombre);
+        profileEmail.setText(email);
+
+    }
+
 }

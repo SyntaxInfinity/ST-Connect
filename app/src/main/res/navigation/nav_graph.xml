@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_horario">
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.stconnect.ui.profile.ProfileFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nav_horario"
+        android:name="com.example.stconnect.ui.horario.HorarioFragment"
+        android:label="Horario"
+        tools:layout="@layout/fragment_horario" />
+    <fragment
+        android:id="@+id/nav_calificaciones"
+        android:name="com.example.stconnect.ui.calificaciones.CalificacionesFragment"
+        android:label="Calificaciones"
+        tools:layout="@layout/fragment_calificaciones" />
+
+    <fragment
+        android:id="@+id/nav_evaluaciones"
+        android:name="com.example.stconnect.ui.evaluaciones.EvaluacionesFragment"
+        android:label="Evaluaciones"
+        tools:layout="@layout/fragment_evaluaciones" />
+
+    <fragment
+        android:id="@+id/nav_web"
+        android:name="com.example.stconnect.ui.aulavirtual.AulaVirtualFragment"
+        android:label="Web Aula"
+        tools:layout="@layout/fragment_web" />
+    <fragment
+        android:id="@+id/nav_notificaciones"
+        android:name="com.example.stconnect.ui.notificaciones.NotificacionesFragment"
+        android:label="Web Aula"
+        tools:layout="@layout/fragment_notificaciones" />
+
+</navigation>

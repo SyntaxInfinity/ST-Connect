@@ -1,6 +1,5 @@
-package com.example.stconnect.ui.aulavirtual;
+package com.example.stconnect.ui.notificaciones;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,22 +11,18 @@ import androidx.fragment.app.Fragment;
 
 import com.example.stconnect.R;
 
-public class AulaVirtualFragment extends Fragment {
-
-    public AulaVirtualFragment() {
-        // Required empty public constructor
+public class NotificacionesFragment extends Fragment {
+    public NotificacionesFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_web, container, false);
+        return inflater.inflate(R.layout.fragment_notificaciones, container, false);
     }
-    
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-    
-    
 }

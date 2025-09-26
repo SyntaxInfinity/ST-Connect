@@ -1,69 +1,87 @@
 package com.example.stconnect;
 
 import android.os.Bundle;
-import android.widget.CalendarView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.stconnect.databinding.ActivityHorarioBinding;
-
 public class HorarioActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityHorarioBinding binding;
+    private AppBarConfiguration appBarConfiguration;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_horario);
 
-        binding = ActivityHorarioBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        // Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        setSupportActionBar(binding.appBarHorario.toolbar);
+        // Drawer y NavView
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
-        FloatingActionButton fab = binding.appBarHorario.fab;
-        fab.setOnClickListener(view ->
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(fab).show()
-        );
+        // NavController
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_content_horario);
+        navController = navHostFragment.getNavController();
 
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_calificaciones, R.id.nav_evaluaciones, R.id.nav_web)
+        // Configuración del AppBar - INCLUYE TODOS LOS DESTINOS
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_horario,
+                R.id.nav_calificaciones,
+                R.id.nav_evaluaciones,
+                R.id.nav_web
+        )
                 .setOpenableLayout(drawer)
                 .build();
 
-        NavHostFragment navHostFragment =
-                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_horario);
-        NavController navController = navHostFragment.getNavController();
+        // Vincular Toolbar con NavController
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        // Vincular NavigationView con NavController
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        CalendarView calendar = findViewById(R.id.calendarView);
-        calendar.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+        // Opcional: Agregar listener para debuggear
+        navigationView.setNavigationItemSelectedListener(item -> {
+            // Cerrar el drawer
+            drawer.closeDrawer(GravityCompat.START);
+
+            // Manejar la navegación
+            boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+            if (!handled) {
+                // Si no se maneja, hacer navegación manual
+                handleManualNavigation(item.getItemId());
+            }
+            return true;
         });
+    }
+
+    private void handleManualNavigation(int itemId) {
+        if (itemId == R.id.nav_horario) {
+            navController.navigate(R.id.nav_horario);
+        } else if (itemId == R.id.nav_calificaciones) {
+            navController.navigate(R.id.nav_calificaciones);
+        } else if (itemId == R.id.nav_evaluaciones) {
+            navController.navigate(R.id.nav_evaluaciones);
+        } else if (itemId == R.id.nav_web) {
+            navController.navigate(R.id.nav_web);
+        }
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavHostFragment navHostFragment =
-                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_horario);
-        NavController navController = navHostFragment.getNavController();
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 }
-
