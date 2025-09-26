@@ -96,11 +96,14 @@ Actualmente, los estudiantes deben acceder al sistema institucional para consult
 
 Abrir Android Studio y abrin un nuevo projecto 
 <img width="519" height="857" alt="image" src="https://github.com/user-attachments/assets/a4a9d805-bee4-474f-b08d-a96dbd7ba720" />
+
 Buscar el projecto clonado, abrirlo y esperar
 <img width="947" height="581" alt="image" src="https://github.com/user-attachments/assets/3eb2fb73-c7e5-42ba-a1be-b7b17b2765df" />
+
 Despues ejecutar el emulador del android studio para ejecutar el programa
 <img width="1864" height="474" alt="image" src="https://github.com/user-attachments/assets/c80725ed-72fd-421e-ac09-0c8e2ce7f7a1" />
-una vez ejecutada la simulacion usar el programa normalmente
+
+Una vez ejecutada la simulacion usar el programa normalmente
 <img width="491" height="1020" alt="image" src="https://github.com/user-attachments/assets/8da7e0ea-78a3-4bfe-86d5-0d816bf926b4" />
 
  ## Integrantes del equipo 
