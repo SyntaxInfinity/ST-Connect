@@ -2,32 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/profile_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher_round"
+        android:layout_width="98dp"
+        android:layout_height="97dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="Foto de perfil"
-        android:layout_marginBottom="16dp" />
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Nombre del Usuario"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/profile_email"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="usuario@correo.com"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/profile_gps"
+        android:layout_width="203dp"
+        android:layout_height="35dp"
+        android:text="CFT/IP SANTO TOMAS RANCAGUA"
+        android:layout_marginBottom="400dp"
+        android:textAlignment="center" />
+    <Button
+        android:id="@+id/btn_exit_session"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="usuario@correo.com"
-        android:textSize="16sp" />
+        android:backgroundTint="#224922"
+        android:text="cerrar sesion" />
 
 </LinearLayout>

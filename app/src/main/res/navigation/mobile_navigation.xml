@@ -28,4 +28,10 @@
         android:name="com.example.stconnect.ui.profile.ProfileFragment"
         android:label="perfil"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_notificaciones"
+        android:name="com.example.stconnect.ui.notificaciones.NotificacionesFragment"
+        android:label="notificaciones"
+        tools:layout="@layout/fragment_notificaciones" />
 </navigation>
