@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/nav_notificaciones"
         android:name="com.example.stconnect.ui.notificaciones.NotificacionesFragment"
-        android:label="Web Aula"
+        android:label="Notificaciones"
         tools:layout="@layout/fragment_notificaciones" />
 
 </navigation>
