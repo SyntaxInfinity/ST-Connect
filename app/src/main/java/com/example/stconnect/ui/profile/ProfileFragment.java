@@ -34,9 +34,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        profileName = view.findViewById(R.id.profile_name);
-        profileEmail = view.findViewById(R.id.profile_email);
-        profileGps = view.findViewById(R.id.profile_gps);
+        profileName = view.findViewById(R.id.profileName);
+        profileEmail = view.findViewById(R.id.profileEmail);
+        profileGps = view.findViewById(R.id.profileGps);
     }
 
     private void loadProfileData() {
@@ -48,7 +48,5 @@ public class ProfileFragment extends Fragment {
         profileName.setText(nombre);
         profileEmail.setText(email);
         profileGps.setText(gps);
-
     }
-
 }
