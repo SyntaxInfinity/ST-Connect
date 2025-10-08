@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.stconnect.R;
 import com.google.android.material.card.MaterialCardView;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +25,10 @@ public class CalificacionesFragment extends Fragment {
             "Lenguaje - 88 (B+)",
             "Ciencias - 92 (A-)",
             "Historia - 85 (B)",
-            "Inglés - 90 (A-)"
+            "Inglés - 90 (A-)",
+            "Tecnologia - 96 - (A+)",
+            "Musica - 35 - (F-)",
+            "Ed fisica - 100 -(A+)"
     );
 
     public CalificacionesFragment() {
@@ -43,42 +48,76 @@ public class CalificacionesFragment extends Fragment {
     }
 
     private void setupCardsWithData(View view) {
-        MaterialCardView[] cards = {
-                view.findViewById(R.id.card_asignatura_1),
-                view.findViewById(R.id.card_asignatura_2),
-                view.findViewById(R.id.card_asignatura_3),
-                view.findViewById(R.id.card_asignatura_4),
-                view.findViewById(R.id.card_asignatura_5)
+        int[] cardIds = {
+                R.id.card_asignatura_1,
+                R.id.card_asignatura_2,
+                R.id.card_asignatura_3,
+                R.id.card_asignatura_4,
+                R.id.card_asignatura_5,
+                R.id.card_asignatura_6,
+                R.id.card_asignatura_7,
+                R.id.card_asignatura_8
         };
 
-        for (int i = 0; i < Math.min(cards.length, asignaturas.size()); i++) {
-            if (cards[i] != null) {
-                final String asignaturaData = asignaturas.get(i);
+        int[] detailIds = {
+                R.id.layout_detalle_1,
+                R.id.layout_detalle_2,
+                R.id.layout_detalle_3,
+                R.id.layout_detalle_4,
+                R.id.layout_detalle_5,
+                R.id.layout_detalle_6,
+                R.id.layout_detalle_7,
+                R.id.layout_detalle_8
+        };
 
-                TextView textView = null;
-                if (cards[i].getChildCount() > 0) {
-                    View child = cards[i].getChildAt(0);
-                    if (child instanceof TextView) {
-                        textView = (TextView) child;
-                    }
-                }
+        int[] notaIds = {
+                R.id.tv_nota_1,
+                R.id.tv_nota_2,
+                R.id.tv_nota_3,
+                R.id.tv_nota_4,
+                R.id.tv_nota_5,
+                R.id.tv_nota_6,
+                R.id.tv_nota_7,
+                R.id.tv_nota_8
+        };
 
-                if (textView != null) {
-                    textView.setText(asignaturaData.split(" - ")[0]);
+        for (int i = 0; i < asignaturas.size(); i++) {
+            String asignaturaData = asignaturas.get(i);
+            String[] partes = asignaturaData.split(" - ");
+            String nombre = partes[0];
+            String nota = partes[1];
 
-                    int index = i;
-                    cards[i].setOnClickListener(v -> {
-                        mostrarDetalleCalificacion(asignaturaData);
-                    });
-                }
-            }
+            MaterialCardView card = view.findViewById(cardIds[i]);
+            LinearLayout detalle = view.findViewById(detailIds[i]);
+            TextView tvNota = view.findViewById(notaIds[i]);
+
+            TextView tvTitulo = card.findViewById(
+                    getResources().getIdentifier("tv_asignatura_" + (i + 1), "id", requireContext().getPackageName())
+            );
+
+            tvTitulo.setText(nombre);
+            tvNota.setText("Calificación: " + nota);
+
+            card.setOnClickListener(v -> toggleDetalle(detalle));
         }
     }
 
-    private void mostrarDetalleCalificacion(String asignaturaData) {
-        String[] partes = asignaturaData.split(" - ");
-        String mensaje = String.format("Asignatura: %s\nCalificación: %s", partes[0], partes[1]);
-
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
+    private void toggleDetalle(View detalle) {
+        if (detalle.getVisibility() == View.GONE) {
+            // Expandir
+            detalle.setVisibility(View.VISIBLE);
+            detalle.setAlpha(0f);
+            detalle.animate()
+                    .alpha(1f)
+                    .setDuration(300)
+                    .start();
+        } else {
+            // Colapsar
+            detalle.animate()
+                    .alpha(0f)
+                    .setDuration(200)
+                    .withEndAction(() -> detalle.setVisibility(View.GONE))
+                    .start();
+        }
     }
 }

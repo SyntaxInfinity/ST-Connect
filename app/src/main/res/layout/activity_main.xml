@@ -81,6 +81,7 @@
         android:layout_height="49dp"
         android:text="Iniciar sesión"
         android:textStyle="bold"
+        style="@style/BotonPrincipal"
         android:backgroundTint="#224922"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

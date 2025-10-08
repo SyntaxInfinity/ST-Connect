@@ -46,7 +46,10 @@ public class HorarioActivity extends AppCompatActivity {
                 R.id.nav_horario,
                 R.id.nav_calificaciones,
                 R.id.nav_evaluaciones,
-                R.id.nav_web
+                R.id.nav_web,
+                R.id.nav_certificados,
+                R.id.nav_notificaciones,
+                R.id.nav_credencial
         )
                 .setOpenableLayout(drawer)
                 .build();
@@ -75,6 +78,12 @@ public class HorarioActivity extends AppCompatActivity {
             navController.navigate(R.id.nav_evaluaciones);
         } else if (itemId == R.id.nav_web) {
             navController.navigate(R.id.nav_web);
+        } else if (itemId == R.id.nav_certificados) {
+            navController.navigate(R.id.nav_certificados);
+        } else if (itemId == R.id.nav_notificaciones) {
+            navController.navigate(R.id.nav_notificaciones);
+        } else if (itemId == R.id.nav_credencial) {
+            navController.navigate(R.id.nav_credencial);
         }
     }
 

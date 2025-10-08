@@ -1,12 +1,13 @@
 package com.example.stconnect.ui.evaluaciones;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -92,7 +93,6 @@ public class EvaluacionesFragment extends Fragment {
     }
 
     private void configurarClicksEnCards(View view) {
-        // Opcional: Hacer que toda la card sea clickeable
         MaterialCardView card1 = view.findViewById(R.id.card_evaluacion_1);
         if (card1 != null) {
             card1.setOnClickListener(v -> {
@@ -122,14 +122,26 @@ public class EvaluacionesFragment extends Fragment {
     }
 
     private void mostrarDetallesEvaluacion(Evaluacion evaluacion) {
-        String mensaje = String.format(
-                "Asignatura: %s\nFecha: %s\nDescripción: %s",
-                evaluacion.getAsignatura(),
-                evaluacion.getFecha(),
-                evaluacion.getDescripcion()
-        );
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View dialogView = inflater.inflate(R.layout.dialog_detalles_evaluaciones, null);
 
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+
+        TextView txtPrueba = dialogView.findViewById(R.id.txtPrueba);
+        TextView txtProfesor = dialogView.findViewById(R.id.txtProfesor);
+        TextView txtSala = dialogView.findViewById(R.id.txtSala);
+        Button btnCerrar = dialogView.findViewById(R.id.btnCerrar);
+
+        txtPrueba.setText("Asignatura: " + evaluacion.getAsignatura());
+        txtProfesor.setText("Profesor: Juan Pérez");
+        txtSala.setText("Sala: B-203");
+
+        btnCerrar.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
 
     }
 

@@ -11,8 +11,7 @@
         android:layout_width="98dp"
         android:layout_height="97dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="Foto de perfil"
-        android:src="@mipmap/ic_launcher_round" />
+        android:src="@drawable/logo_santo_tomas" />
 
     <TextView
         android:id="@+id/profileName"
@@ -24,11 +23,28 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/profileRut"
+        android:layout_width="197dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="rut estudiante"
+        android:textAlignment="center" />
+
+    <TextView
         android:id="@+id/profileEmail"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="usuario@correo.com"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/profileCarrera"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="carrera usuario"
         android:textAlignment="center"
         android:textSize="16sp" />
 
@@ -41,6 +57,7 @@
         android:textAlignment="center" />
     <Button
         android:id="@+id/btnLogout"
+        style="@style/BotonPrincipal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#224922"

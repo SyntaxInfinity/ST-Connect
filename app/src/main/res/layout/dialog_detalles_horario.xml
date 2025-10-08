@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/txtAsignatura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Asignatura:"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/txtProfesor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profesor:"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/txtSala"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sala:"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/txtHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hora:"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnCerrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#224922"
+        android:text="Cerrar"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

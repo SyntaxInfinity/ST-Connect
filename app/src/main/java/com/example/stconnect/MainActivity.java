@@ -3,7 +3,6 @@ package com.example.stconnect;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -14,7 +13,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 
 public class MainActivity extends AppCompatActivity {
-    private WebView webView;
 
     Button btnlogin;
 

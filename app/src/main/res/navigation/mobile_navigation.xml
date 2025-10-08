@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_web" />
 
     <fragment
-        android:id="@+id/nav_profile"
+        android:id="@+id/nav_credencial"
         android:name="com.example.stconnect.ui.profile.ProfileFragment"
         android:label="perfil"
         tools:layout="@layout/fragment_profile" />
@@ -34,4 +34,10 @@
         android:name="com.example.stconnect.ui.notificaciones.NotificacionesFragment"
         android:label="notificaciones"
         tools:layout="@layout/fragment_notificaciones" />
+
+    <fragment
+        android:id="@+id/nav_certificados"
+        android:name="com.example.stconnect.ui.certificados.certificados"
+        android:label="certificados"
+        tools:layout="@layout/fragment_certificados" />
 </navigation>

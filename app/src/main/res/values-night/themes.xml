@@ -1,7 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
+    <!-- Tema base del modo oscuro -->
     <style name="Base.Theme.StConnect" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Personaliza colores principales si lo deseas -->
+        <!-- <item name="colorPrimary">@color/tu_color_primario</item> -->
     </style>
+
+    <!-- Botón principal (Inicio de sesión / Cerrar sesión) -->
+    <style name="BotonPrincipal" parent="Widget.Material3.Button">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+    </style>
+
+    <!-- FloatingActionButton -->
+    <style name="FABPersonalizado" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">#224922</item>
+        <item name="tint">#FFFFFF</item>
+    </style>
+
 </resources>
