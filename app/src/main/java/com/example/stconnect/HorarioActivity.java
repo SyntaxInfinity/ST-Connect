@@ -1,6 +1,7 @@
 package com.example.stconnect;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,10 +105,20 @@ public class HorarioActivity extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id == R.id.correoservice) {
-                    Toast.makeText(HorarioActivity.this, "correo dae", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("message/rfc822");
+                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"daegeneral@santotomas.cl"});
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Consulta desde STCONNECT");
+                    try {
+                        startActivity(Intent.createChooser(intent, "Enviar correo con:"));
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(HorarioActivity.this, "No hay aplicaciones de correo instaladas", Toast.LENGTH_SHORT).show();
+                    }
                     return true;
                 } else if (id == R.id.phoneservice) {
-                    Toast.makeText(HorarioActivity.this, "telefono dae", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:+56933221144"));
+                    startActivity(intent);
                     return true;
                 }
 

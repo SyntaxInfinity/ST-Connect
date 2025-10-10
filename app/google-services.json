@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "887985570507",
+    "project_id": "stconnect-9877c",
+    "storage_bucket": "stconnect-9877c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887985570507:android:562fe1d96d64f998a7914e",
+        "android_client_info": {
+          "package_name": "com.example.stconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoTbZ1DTdgTrNPWvOPOAsmpkqOkVbPp3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

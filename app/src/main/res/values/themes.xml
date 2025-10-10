@@ -11,6 +11,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="FABPersonalizado" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">#224922</item>
+        <item name="tint">#FFFFFF</item>
+    </style>
 
     <style name="Theme.StConnect.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
