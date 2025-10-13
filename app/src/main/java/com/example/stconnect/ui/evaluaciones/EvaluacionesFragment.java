@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.stconnect.R;
 import com.google.android.material.card.MaterialCardView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,23 +42,26 @@ public class EvaluacionesFragment extends Fragment {
     private void inicializarDatos() {
         listaEvaluaciones = new ArrayList<>();
 
-        // Datos de ejemplo - puedes reemplazar con datos reales
+        // 🔹 Datos de ejemplo - puedes reemplazar con los reales
         listaEvaluaciones.add(new Evaluacion(
                 "Integracion de Competencias",
                 "15/09",
-                "Evaluación sobre la integración de competencias profesionales"
+                "Evaluación sobre la integración de competencias profesionales",
+                "Análisis de requerimientos, diagramas UML, patrones de diseño"
         ));
 
         listaEvaluaciones.add(new Evaluacion(
                 "Iot",
-                "15/09",
-                "Examen práctico de Internet de las Cosas"
+                "18/09",
+                "Examen práctico de Internet de las Cosas",
+                "Docker Compose, Dockerfile, Python, MySQL, sensores IoT"
         ));
 
         listaEvaluaciones.add(new Evaluacion(
-                "Ingles Basico II",
-                "15/09",
-                "Examen de nivel básico de inglés"
+                "Inglés Básico II",
+                "22/09",
+                "Examen de nivel básico de inglés",
+                "Reading comprehension, writing, grammar tenses, vocabulary"
         ));
     }
 
@@ -133,34 +137,36 @@ public class EvaluacionesFragment extends Fragment {
         TextView txtPrueba = dialogView.findViewById(R.id.txtPrueba);
         TextView txtProfesor = dialogView.findViewById(R.id.txtProfesor);
         TextView txtSala = dialogView.findViewById(R.id.txtSala);
+        TextView txtTemario = dialogView.findViewById(R.id.Txttemario);
         Button btnCerrar = dialogView.findViewById(R.id.btnCerrar);
 
         txtPrueba.setText("Asignatura: " + evaluacion.getAsignatura());
         txtProfesor.setText("Profesor: Juan Pérez");
         txtSala.setText("Sala: B-203");
+        txtTemario.setText("Temario: " + evaluacion.getTemario());
 
         btnCerrar.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
-
     }
-
-
 
     public static class Evaluacion {
         private String asignatura;
         private String fecha;
         private String descripcion;
+        private String temario;
 
-        public Evaluacion(String asignatura, String fecha, String descripcion) {
+        public Evaluacion(String asignatura, String fecha, String descripcion, String temario) {
             this.asignatura = asignatura;
             this.fecha = fecha;
             this.descripcion = descripcion;
+            this.temario = temario;
         }
 
         // Getters
         public String getAsignatura() { return asignatura; }
         public String getFecha() { return fecha; }
         public String getDescripcion() { return descripcion; }
+        public String getTemario() { return temario; }
     }
 }

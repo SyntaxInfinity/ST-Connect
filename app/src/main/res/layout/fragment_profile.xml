@@ -1,67 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp">
 
     <ImageView
         android:id="@+id/profileImage"
-        android:layout_width="98dp"
-        android:layout_height="97dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/logo_santo_tomas" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo_santo_tomas"
+        android:contentDescription="Logo Santo Tomás"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Nombre del Usuario"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.775"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
 
     <TextView
         android:id="@+id/profileRut"
-        android:layout_width="197dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="rut estudiante"
-        android:textAlignment="center" />
+        android:text="RUT estudiante"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.704"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.081" />
 
     <TextView
         android:id="@+id/profileEmail"
         android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_height="21dp"
         android:text="usuario@correo.com"
-        android:textAlignment="center"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.191" />
 
     <TextView
         android:id="@+id/profileCarrera"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="carrera usuario"
+        android:layout_width="112dp"
+        android:layout_height="25dp"
+        android:text="Carrera usuario"
         android:textAlignment="center"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.717"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.127" />
 
-    <TextView
-        android:id="@+id/profileGps"
-        android:layout_width="203dp"
-        android:layout_height="35dp"
-        android:text="CFT/IP SANTO TOMAS RANCAGUA"
-        android:layout_marginBottom="360dp"
-        android:textAlignment="center" />
-    <Button
-        android:id="@+id/btnLogout"
-        style="@style/BotonPrincipal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#224922"
-        android:text="cerrar sesion"
-        android:onClick="Logout"/>
+    <LinearLayout
+        android:layout_width="394dp"
+        android:layout_height="236dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498">
 
-</LinearLayout>
+        <!-- Aquí puedes usar una foto o QR -->
+        <ImageView
+            android:id="@+id/fotoUsuario"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/outline_article_person"
+            android:contentDescription="Foto del usuario"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
