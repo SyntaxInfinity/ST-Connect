@@ -109,14 +109,16 @@
             android:contentDescription="Foto del usuario"
             android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/profileGps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:text="Ubicación no disponible"
-            android:textSize="16sp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/profileGps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Ubicación no disponible"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
