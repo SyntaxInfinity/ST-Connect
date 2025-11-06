@@ -6,20 +6,22 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
+
     <ImageView
         android:id="@+id/profileImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="110dp"
+        android:layout_height="103dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/logo_santo_tomas"
         android:contentDescription="Logo Santo Tomás"
-        android:layout_marginTop="16dp"
-        tools:ignore="MissingConstraints" />
-
+        android:src="@drawable/logo_santo_tomas"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="6dp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="255dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,9 +31,9 @@
 
         <TextView
             android:id="@+id/profileName"
+            android:layout_width="220dp"
+            android:layout_height="54dp"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Nombre del Usuario"
             android:textAlignment="center"
             android:textSize="20sp"
@@ -71,19 +73,6 @@
             app:layout_constraintVertical_bias="0.118" />
 
 
-        <TextView
-            android:id="@+id/profileEmail"
-            android:layout_width="195dp"
-            android:layout_height="21dp"
-            android:text="usuario@correo.com"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.191" />
     </LinearLayout>
 
     <LinearLayout
@@ -109,14 +98,29 @@
             android:contentDescription="Foto del usuario"
             android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/profileGps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:text="Ubicación no disponible"
-            android:textSize="16sp" />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/profileEmail"
+        android:layout_width="356dp"
+        android:layout_height="24dp"
+        android:text="usuario@correo.com"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.186" />
+
+    <TextView
+        android:id="@+id/profileGps"
+        android:layout_width="396dp"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:text="Ubicación no disponible"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-9dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
