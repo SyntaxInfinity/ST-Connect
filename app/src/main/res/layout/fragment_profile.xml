@@ -6,21 +6,20 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
-
     <ImageView
         android:id="@+id/profileImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
-        android:contentDescription="Logo Santo Tomás"
         android:src="@drawable/logo_santo_tomas"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-3dp"
-        tools:layout_editor_absoluteY="2dp" />
+        android:contentDescription="Logo Santo Tomás"
+        android:layout_marginTop="16dp"
+        tools:ignore="MissingConstraints" />
+
 
     <LinearLayout
-        android:layout_width="260dp"
-        android:layout_height="104dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,9 +29,9 @@
 
         <TextView
             android:id="@+id/profileName"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:text="Nombre del Usuario"
             android:textAlignment="center"
             android:textSize="20sp"
@@ -72,6 +71,19 @@
             app:layout_constraintVertical_bias="0.118" />
 
 
+        <TextView
+            android:id="@+id/profileEmail"
+            android:layout_width="195dp"
+            android:layout_height="21dp"
+            android:text="usuario@correo.com"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.191" />
     </LinearLayout>
 
     <LinearLayout
@@ -107,18 +119,4 @@
             android:textSize="16sp" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/profileEmail"
-        android:layout_width="358dp"
-        android:layout_height="24dp"
-        android:text="usuario@correo.com"
-        android:textAlignment="viewStart"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171" />
 </androidx.constraintlayout.widget.ConstraintLayout>
