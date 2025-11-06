@@ -24,10 +24,11 @@
 
         <TextView
             android:id="@+id/txtNombreUsuario"
-            android:layout_width="wrap_content"
+            android:layout_width="126dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Jordan Murillo"
+            android:text="Usuario"
+            android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textStyle="bold" />

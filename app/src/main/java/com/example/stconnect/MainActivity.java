@@ -3,7 +3,6 @@ package com.example.stconnect;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -47,23 +46,34 @@ public class MainActivity extends AppCompatActivity {
 //            irAMain();
 //        }
 //    }
-    private void iniciarSesion() {
-        String email = etEmail.getText().toString().trim();
-        String pass  = etPass.getText().toString().trim();
+private void iniciarSesion() {
+    String email = etEmail.getText().toString().trim();
+    String pass  = etPass.getText().toString().trim();
 
-        if (!validar(email, pass)) return;
+    if (!validar(email, pass)) return;
 
-        auth.signInWithEmailAndPassword(email, pass)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
+    auth.signInWithEmailAndPassword(email, pass)
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    FirebaseUser user = auth.getCurrentUser();
+                    if (user != null) {
+                        String uid = user.getUid();
+
+                        getSharedPreferences("Usuario", MODE_PRIVATE)
+                                .edit()
+                                .putString("uid", uid)
+                                .apply();
+
                         Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
                         irAMain();
-                    } else {
-                        Toast.makeText(this, "No perteneces a la institución",
-                                Toast.LENGTH_LONG).show();
                     }
-                });
-    }
+                } else {
+                    Toast.makeText(this, "No perteneces a la institución",
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+}
+
     private boolean validar(String email, String pass) {
         if (TextUtils.isEmpty(email)) {
             etEmail.setError("Requerido");

@@ -3,9 +3,8 @@ package com.example.stconnect;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +19,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HorarioActivity extends AppCompatActivity {
 
@@ -48,7 +55,7 @@ public class HorarioActivity extends AppCompatActivity {
                 R.id.nav_calificaciones,
                 R.id.nav_evaluaciones,
                 R.id.nav_web,
-                R.id.nav_certificados,
+                R.id.nav_biblioteca,
                 R.id.nav_notificaciones,
                 R.id.nav_credencial
         )
@@ -56,7 +63,6 @@ public class HorarioActivity extends AppCompatActivity {
                 .build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.setNavigationItemSelectedListener(item -> {
@@ -67,6 +73,43 @@ public class HorarioActivity extends AppCompatActivity {
                 handleManualNavigation(item.getItemId());
             }
             return true;
+        });
+
+        mostrarNombreUsuario();
+    }
+
+    private void mostrarNombreUsuario() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView txtNombreUsuario = headerView.findViewById(R.id.txtNombreUsuario);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("stconnect/usuarios")
+                .child(user.getUid())
+                .child("nombre");
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                String nombreCompleto = snapshot.getValue(String.class);
+                if (nombreCompleto == null || nombreCompleto.trim().isEmpty()) {
+                    txtNombreUsuario.setText("Usuario");
+                    return;
+                }
+
+                String[] partes = nombreCompleto.trim().split("\\s+");
+                String primerNombre = partes.length > 0 ? partes[0] : "";
+                String primerApellido = partes.length > 1 ? partes[1] : "";
+
+                txtNombreUsuario.setText((primerNombre + " " + primerApellido).trim());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                txtNombreUsuario.setText("Usuario");
+            }
         });
     }
 
@@ -79,8 +122,8 @@ public class HorarioActivity extends AppCompatActivity {
             navController.navigate(R.id.nav_evaluaciones);
         } else if (itemId == R.id.nav_web) {
             navController.navigate(R.id.nav_web);
-        } else if (itemId == R.id.nav_certificados) {
-            navController.navigate(R.id.nav_certificados);
+        } else if (itemId == R.id.nav_biblioteca) {
+            navController.navigate(R.id.nav_biblioteca);
         } else if (itemId == R.id.nav_notificaciones) {
             navController.navigate(R.id.nav_notificaciones);
         } else if (itemId == R.id.nav_credencial) {
@@ -99,31 +142,28 @@ public class HorarioActivity extends AppCompatActivity {
         PopupMenu pms = new PopupMenu(this, fab);
         getMenuInflater().inflate(R.menu.popup_ayuda, pms.getMenu());
 
-        pms.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
+        pms.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
 
-                if (id == R.id.correoservice) {
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("message/rfc822");
-                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"daegeneral@santotomas.cl"});
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Consulta desde STCONNECT");
-                    try {
-                        startActivity(Intent.createChooser(intent, "Enviar correo con:"));
-                    } catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(HorarioActivity.this, "No hay aplicaciones de correo instaladas", Toast.LENGTH_SHORT).show();
-                    }
-                    return true;
-                } else if (id == R.id.phoneservice) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:+56933221144"));
-                    startActivity(intent);
-                    return true;
+            if (id == R.id.correoservice) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("message/rfc822");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"daegeneral@santotomas.cl"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Consulta desde STCONNECT");
+                try {
+                    startActivity(Intent.createChooser(intent, "Enviar correo con:"));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(HorarioActivity.this, "No hay aplicaciones de correo instaladas", Toast.LENGTH_SHORT).show();
                 }
-
-                return false;
+                return true;
+            } else if (id == R.id.phoneservice) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:+56933221144"));
+                startActivity(intent);
+                return true;
             }
+
+            return false;
         });
 
         pms.show();

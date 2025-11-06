@@ -32,15 +32,22 @@
         android:name="com.example.stconnect.ui.aulavirtual.AulaVirtualFragment"
         android:label="Web Aula"
         tools:layout="@layout/fragment_web" />
+
     <fragment
         android:id="@+id/nav_notificaciones"
         android:name="com.example.stconnect.ui.notificaciones.NotificacionesFragment"
         android:label="Notificaciones"
         tools:layout="@layout/fragment_notificaciones" />
+
     <fragment
-        android:id="@+id/nav_certificados"
-        android:name="com.example.stconnect.ui.certificados.certificados"
+        android:id="@+id/nav_biblioteca"
+        android:name="com.example.stconnect.ui.biblioteca.Biblioteca"
         android:label="certificados"
-        tools:layout="@layout/fragment_certificados" />
+        tools:layout="@layout/fragment_biblioteca" />
+
+    <fragment
+        android:id="@+id/nav_qr"
+        android:name="com.example.stconnect.ui.asistencia.ScanQRFragment"
+        android:label="Marcar Asistencia"/>
 
 </navigation>

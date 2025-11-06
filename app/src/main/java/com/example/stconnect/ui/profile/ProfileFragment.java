@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,18 +19,25 @@ import androidx.fragment.app.Fragment;
 import com.example.stconnect.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class ProfileFragment extends Fragment {
+
     private TextView profileName, profileEmail, profileGps, profileRut, profileCarrera;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int REQUEST_LOCATION_PERMISSION = 1001;
 
-    public ProfileFragment() {
-    }
+    public ProfileFragment() { }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -42,9 +50,9 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initViews(view);
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
+        // Pedir permiso de ubicación si no está otorgado
         if (ActivityCompat.checkSelfPermission(requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
@@ -64,19 +72,42 @@ public class ProfileFragment extends Fragment {
     }
 
     private void loadProfileData() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        String nombre = "Juan Pérez";
-        String email = "juan.perez@correo.com";
-        //String gps = "CFT SANTO TOMAS RANCAGUA";
-        String rut = "152203245-5";
-        String carrera = "INGENIERIA EN INFORMÁTICA";
+        if (user == null) {
+            Toast.makeText(getContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        profileName.setText(nombre);
-        profileEmail.setText(email);
-        //profileGps.setText(gps);
-        profileRut.setText(rut);
-        profileCarrera.setText(carrera);
+        String uid = user.getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("stconnect/usuarios/" + uid);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String nombre = snapshot.child("nombre").getValue(String.class);
+                    String rut = snapshot.child("rut").getValue(String.class);
+                    String carrera = snapshot.child("carrera").getValue(String.class);
+                    String correo = user.getEmail(); // viene del login
+
+                    profileName.setText(nombre != null ? nombre : "—");
+                    profileEmail.setText(correo != null ? correo : "—");
+                    profileRut.setText(rut != null ? rut : "—");
+                    profileCarrera.setText(carrera != null ? carrera : "—");
+                } else {
+                    Toast.makeText(getContext(), "No se encontraron datos del usuario", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Error al conectar con Realtime Database", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
     private void getLastLocation() {
         if (ActivityCompat.checkSelfPermission(requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -99,7 +130,6 @@ public class ProfileFragment extends Fragment {
                                 String country = address.getCountryName();
 
                                 String ubicacion = "Ubicación: ";
-
                                 if (city != null) ubicacion += city;
                                 if (region != null && !region.equals(city)) ubicacion += ", " + region;
                                 if (country != null) ubicacion += ", " + country;

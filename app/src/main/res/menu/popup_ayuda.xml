@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/correoservice"
-        android:title="daegeneral@santotomas.cl" />
+        android:title="jefedecarrera@santotomas.cl" />
     <item
         android:id="@+id/phoneservice"
         android:title="+56933221144" />

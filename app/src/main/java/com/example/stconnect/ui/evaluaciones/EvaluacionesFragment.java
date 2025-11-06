@@ -1,11 +1,14 @@
 package com.example.stconnect.ui.evaluaciones;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,159 +17,128 @@ import androidx.fragment.app.Fragment;
 
 import com.example.stconnect.R;
 import com.google.android.material.card.MaterialCardView;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class EvaluacionesFragment extends Fragment {
 
-    private List<Evaluacion> listaEvaluaciones;
+    private LinearLayout contenedorEvaluaciones;
+    private Context context;
 
-    public EvaluacionesFragment() {
-    }
-
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_evaluaciones, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_evaluaciones, container, false);
+        contenedorEvaluaciones = view.findViewById(R.id.contenedorEvaluaciones);
+        context = requireContext();
+
+        cargarEvaluacionesDesdeFirebase();
+
+        return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private void cargarEvaluacionesDesdeFirebase() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
 
-        inicializarDatos();
-        configurarBotones(view);
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("stconnect/evaluaciones")
+                .child(user.getUid());
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                contenedorEvaluaciones.removeAllViews();
+
+                if (!snapshot.exists()) {
+                    TextView sinDatos = new TextView(context);
+                    sinDatos.setText("No hay evaluaciones registradas");
+                    sinDatos.setTextSize(18);
+                    sinDatos.setPadding(20, 20, 20, 20);
+                    contenedorEvaluaciones.addView(sinDatos);
+                    return;
+                }
+
+                for (DataSnapshot evaluacionSnap : snapshot.getChildren()) {
+                    String ramo = evaluacionSnap.child("ramo").getValue(String.class);
+                    String fecha = evaluacionSnap.child("fecha").getValue(String.class);
+                    String tipo = evaluacionSnap.child("tipo").getValue(String.class);
+                    String peso = evaluacionSnap.child("peso").getValue(String.class);
+
+                    agregarCardEvaluacion(ramo, fecha, tipo, peso);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Error al leer evaluaciones", error.toException());
+            }
+        });
     }
 
-    private void inicializarDatos() {
-        listaEvaluaciones = new ArrayList<>();
-
-        // 🔹 Datos de ejemplo - puedes reemplazar con los reales
-        listaEvaluaciones.add(new Evaluacion(
-                "Integracion de Competencias",
-                "15/09",
-                "Evaluación sobre la integración de competencias profesionales",
-                "Análisis de requerimientos, diagramas UML, patrones de diseño"
+    private void agregarCardEvaluacion(String ramo, String fecha, String tipo, String peso) {
+        MaterialCardView card = new MaterialCardView(context);
+        card.setLayoutParams(new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
         ));
+        ((LinearLayout.LayoutParams) card.getLayoutParams()).setMargins(0, 0, 0, 24);
+        card.setCardElevation(6);
+        card.setRadius(18);
+        card.setUseCompatPadding(true);
 
-        listaEvaluaciones.add(new Evaluacion(
-                "Iot",
-                "18/09",
-                "Examen práctico de Internet de las Cosas",
-                "Docker Compose, Dockerfile, Python, MySQL, sensores IoT"
-        ));
+        LinearLayout layoutInterno = new LinearLayout(context);
+        layoutInterno.setOrientation(LinearLayout.HORIZONTAL);
+        layoutInterno.setPadding(20, 20, 20, 20);
+        layoutInterno.setGravity(android.view.Gravity.CENTER_VERTICAL);
 
-        listaEvaluaciones.add(new Evaluacion(
-                "Inglés Básico II",
-                "22/09",
-                "Examen de nivel básico de inglés",
-                "Reading comprehension, writing, grammar tenses, vocabulary"
-        ));
+        TextView tvRamo = new TextView(context);
+        tvRamo.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        tvRamo.setText(ramo);
+        tvRamo.setTextSize(18);
+        tvRamo.setTypeface(null, android.graphics.Typeface.BOLD);
+        tvRamo.setTextColor(getResources().getColor(R.color.black));
+
+        TextView tvFecha = new TextView(context);
+        tvFecha.setText(fecha);
+        tvFecha.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        tvFecha.setPadding(0, 0, 20, 0);
+
+        Button btnDetalles = new Button(context);
+        btnDetalles.setText("DETALLES");
+        btnDetalles.setTextColor(getResources().getColor(android.R.color.white));
+        btnDetalles.setBackgroundTintList(context.getColorStateList(R.color.green_400));
+
+        layoutInterno.addView(tvRamo);
+        layoutInterno.addView(tvFecha);
+        layoutInterno.addView(btnDetalles);
+
+        card.addView(layoutInterno);
+        contenedorEvaluaciones.addView(card);
+
+        View.OnClickListener listener = v -> mostrarDetallesDialog(ramo, tipo, peso, fecha);
+        btnDetalles.setOnClickListener(listener);
+        card.setOnClickListener(listener);
     }
 
-    private void configurarBotones(View view) {
-        Button btnDetalles1 = view.findViewById(R.id.btn_detalles_1);
-        if (btnDetalles1 != null) {
-            btnDetalles1.setOnClickListener(v -> {
-                if (listaEvaluaciones.size() > 0) {
-                    mostrarDetallesEvaluacion(listaEvaluaciones.get(0));
-                }
-            });
-        }
-
-        Button btnDetalles2 = view.findViewById(R.id.btn_detalles_2);
-        if (btnDetalles2 != null) {
-            btnDetalles2.setOnClickListener(v -> {
-                if (listaEvaluaciones.size() > 1) {
-                    mostrarDetallesEvaluacion(listaEvaluaciones.get(1));
-                }
-            });
-        }
-
-        Button btnDetalles3 = view.findViewById(R.id.btn_detalles_3);
-        if (btnDetalles3 != null) {
-            btnDetalles3.setOnClickListener(v -> {
-                if (listaEvaluaciones.size() > 2) {
-                    mostrarDetallesEvaluacion(listaEvaluaciones.get(2));
-                }
-            });
-        }
-
-        configurarClicksEnCards(view);
-    }
-
-    private void configurarClicksEnCards(View view) {
-        MaterialCardView card1 = view.findViewById(R.id.card_evaluacion_1);
-        if (card1 != null) {
-            card1.setOnClickListener(v -> {
-                if (listaEvaluaciones.size() > 0) {
-                    mostrarDetallesEvaluacion(listaEvaluaciones.get(0));
-                }
-            });
-        }
-
-        MaterialCardView card2 = view.findViewById(R.id.card_evaluacion_2);
-        if (card2 != null) {
-            card2.setOnClickListener(v -> {
-                if (listaEvaluaciones.size() > 1) {
-                    mostrarDetallesEvaluacion(listaEvaluaciones.get(1));
-                }
-            });
-        }
-
-        MaterialCardView card3 = view.findViewById(R.id.card_evaluacion_3);
-        if (card3 != null) {
-            card3.setOnClickListener(v -> {
-                if (listaEvaluaciones.size() > 2) {
-                    mostrarDetallesEvaluacion(listaEvaluaciones.get(2));
-                }
-            });
-        }
-    }
-
-    private void mostrarDetallesEvaluacion(Evaluacion evaluacion) {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View dialogView = inflater.inflate(R.layout.dialog_detalles_evaluaciones, null);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+    private void mostrarDetallesDialog(String ramo, String tipo, String peso, String fecha) {
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_detalles_evaluaciones, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(dialogView);
-
         AlertDialog dialog = builder.create();
 
-        TextView txtPrueba = dialogView.findViewById(R.id.txtPrueba);
-        TextView txtProfesor = dialogView.findViewById(R.id.txtProfesor);
-        TextView txtSala = dialogView.findViewById(R.id.txtSala);
-        TextView txtTemario = dialogView.findViewById(R.id.Txttemario);
-        Button btnCerrar = dialogView.findViewById(R.id.btnCerrar);
+        ((TextView) dialogView.findViewById(R.id.txtPrueba)).setText("Asignatura: " + ramo);
+        ((TextView) dialogView.findViewById(R.id.txtProfesor)).setText("Tipo: " + tipo);
+        ((TextView) dialogView.findViewById(R.id.txtSala)).setText("Fecha: " + fecha);
+        ((TextView) dialogView.findViewById(R.id.Txttemario)).setText("Peso: " + peso);
 
-        txtPrueba.setText("Asignatura: " + evaluacion.getAsignatura());
-        txtProfesor.setText("Profesor: Juan Pérez");
-        txtSala.setText("Sala: B-203");
-        txtTemario.setText("Temario: " + evaluacion.getTemario());
-
-        btnCerrar.setOnClickListener(v -> dialog.dismiss());
-
+        dialogView.findViewById(R.id.btnCerrar).setOnClickListener(v -> dialog.dismiss());
         dialog.show();
-    }
-
-    public static class Evaluacion {
-        private String asignatura;
-        private String fecha;
-        private String descripcion;
-        private String temario;
-
-        public Evaluacion(String asignatura, String fecha, String descripcion, String temario) {
-            this.asignatura = asignatura;
-            this.fecha = fecha;
-            this.descripcion = descripcion;
-            this.temario = temario;
-        }
-
-        // Getters
-        public String getAsignatura() { return asignatura; }
-        public String getFecha() { return fecha; }
-        public String getDescripcion() { return descripcion; }
-        public String getTemario() { return temario; }
     }
 }

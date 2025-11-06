@@ -36,8 +36,14 @@
         tools:layout="@layout/fragment_notificaciones" />
 
     <fragment
-        android:id="@+id/nav_certificados"
-        android:name="com.example.stconnect.ui.certificados.certificados"
-        android:label="certificados"
-        tools:layout="@layout/fragment_certificados" />
+        android:id="@+id/nav_bilbioteca"
+        android:name="com.example.stconnect.ui.biblioteca.Biblioteca"
+        android:label="biblioteca"
+        tools:layout="@layout/fragment_biblioteca" />
+
+    <fragment
+        android:id="@+id/nav_qr"
+        android:name="com.example.stconnect.ui.asistencia.ScanQRFragment"
+        android:label="Marcar Asistencia"/>
+
 </navigation>

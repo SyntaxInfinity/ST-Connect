@@ -29,8 +29,13 @@
             android:icon="@drawable/outline_add_alert"
             android:title="Notificaciones" />
         <item
-            android:id="@+id/nav_certificados"
-            android:icon="@drawable/outline_article_person"
-            android:title="Certificados" />
+            android:id="@+id/nav_biblioteca"
+            android:icon="@drawable/outline_account_balance"
+            android:title="Biblioteca" />
+
+        <item
+            android:id="@+id/nav_qr"
+            android:icon="@drawable/outline_barcode_scanner"
+            android:title="Asistencia QR" />
     </group>
 </menu>

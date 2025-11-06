@@ -12,7 +12,7 @@
         android:gravity="center"
         android:paddingTop="24dp"
         android:paddingBottom="16dp"
-        android:text="Asignaturas"
+        android:text="Calificaciones"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="#1A3C20" />
@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- ===== Asignatura 1 ===== -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_asignatura_1"
                 android:layout_width="match_parent"
@@ -36,16 +37,51 @@
                 app:cardElevation="6dp"
                 app:cardBackgroundColor="#69D58A">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:text="Asignatura 1"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/asignatura1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Asignatura 1"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/nota1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nota: --"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tipo1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+
+                    <TextView
+                        android:id="@+id/peso1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Peso: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- ===== Asignatura 2 ===== -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_asignatura_2"
                 android:layout_width="match_parent"
@@ -55,16 +91,51 @@
                 app:cardElevation="6dp"
                 app:cardBackgroundColor="#69D58A">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:text="Asignatura 2"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/asignatura2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Asignatura 2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/nota2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nota: --"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tipo2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+
+                    <TextView
+                        android:id="@+id/peso2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Peso: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- ===== Asignatura 3 ===== -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_asignatura_3"
                 android:layout_width="match_parent"
@@ -74,16 +145,51 @@
                 app:cardElevation="6dp"
                 app:cardBackgroundColor="#69D58A">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:text="Asignatura 3"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/asignatura3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Asignatura 3"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/nota3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nota: --"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tipo3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+
+                    <TextView
+                        android:id="@+id/peso3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Peso: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- ===== Asignatura 4 ===== -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_asignatura_4"
                 android:layout_width="match_parent"
@@ -93,16 +199,51 @@
                 app:cardElevation="6dp"
                 app:cardBackgroundColor="#69D58A">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:text="Asignatura 4"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/asignatura4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Asignatura 4"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/nota4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nota: --"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tipo4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+
+                    <TextView
+                        android:id="@+id/peso4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Peso: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- ===== Asignatura 5 ===== -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_asignatura_5"
                 android:layout_width="match_parent"
@@ -112,16 +253,211 @@
                 app:cardElevation="6dp"
                 app:cardBackgroundColor="#69D58A">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:text="Asignatura 5"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/asignatura5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Asignatura 5"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/nota5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nota: --"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tipo5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+
+                    <TextView
+                        android:id="@+id/peso5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Peso: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- ===== Asignatura 6 ===== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_asignatura_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#69D58A">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/asignatura6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Asignatura 6"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/nota6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nota: --"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tipo6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+
+                    <TextView
+                        android:id="@+id/peso6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Peso: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ===== Asignatura 7 ===== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_asignatura_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#69D58A">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/asignatura7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Asignatura 7"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/nota7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nota: --"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tipo7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+
+                    <TextView
+                        android:id="@+id/peso7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Peso: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ===== Asignatura 8 ===== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_asignatura_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#69D58A">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/asignatura8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Asignatura 8"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/nota8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nota: --"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tipo8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+
+                    <TextView
+                        android:id="@+id/peso8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Peso: --"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
