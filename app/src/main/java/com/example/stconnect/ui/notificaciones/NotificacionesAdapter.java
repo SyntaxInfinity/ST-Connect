@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.stconnect.R;
+import com.example.stconnect.data.model.Notificacion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,9 @@ public class NotificacionesAdapter extends RecyclerView.Adapter<NotificacionesAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int pos) {
         Notificacion n = lista.get(pos);
 
-        holder.titulo.setText(n.titulo);
-        holder.mensaje.setText(n.mensaje);
-        holder.fecha.setText(n.fecha);
+        holder.titulo.setText(n.getTitulo() != null ? n.getTitulo() : "");
+        holder.mensaje.setText(n.getMensaje() != null ? n.getMensaje() : "");
+        holder.fecha.setText(n.getFecha() != null ? n.getFecha() : "");
     }
 
     @Override

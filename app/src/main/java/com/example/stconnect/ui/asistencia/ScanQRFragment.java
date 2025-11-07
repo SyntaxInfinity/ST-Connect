@@ -10,15 +10,16 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.stconnect.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.stconnect.ui.viewmodel.ScanQRViewModel;
 import com.journeyapps.barcodescanner.ScanOptions;
 import com.journeyapps.barcodescanner.ScanContract;
 
 public class ScanQRFragment extends Fragment {
 
+    private ScanQRViewModel scanQRViewModel;
     private final ActivityResultLauncher<ScanOptions> qrLauncher = registerForActivityResult(
             new ScanContract(),
             result -> {
@@ -33,6 +34,13 @@ public class ScanQRFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_qr, container, false);
+        
+        // Inicializar ViewModel
+        scanQRViewModel = new ViewModelProvider(this).get(ScanQRViewModel.class);
+        
+        // Observar mensajes y errores
+        observeResults();
+        
         view.findViewById(R.id.btnEscanear).setOnClickListener(v -> iniciarEscaneo());
         return view;
     }
@@ -45,55 +53,20 @@ public class ScanQRFragment extends Fragment {
     }
 
     private void procesarQR(String qr) {
-        String[] p = qr.split("\\|");
-        if (p.length < 3) {
-            Toast.makeText(getContext(), "QR inválido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String ramo = normalizar(p[0]);
-        String fecha = p[1];
-        String hora = p[2];
-
-        if (!dentroDeLos10Min(hora)) {
-            Toast.makeText(getContext(), "Fuera de horario permitido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        FirebaseDatabase.getInstance()
-                .getReference("stconnect/usuarios/" + uid + "/nombre")
-                .get()
-                .addOnSuccessListener(snapshot -> {
-                    String nombre = snapshot.getValue(String.class);
-                    if (nombre == null) return;
-
-                    FirebaseDatabase.getInstance()
-                            .getReference("stconnect/asistencia/" + ramo + "/" + fecha + "/" + nombre)
-                            .setValue("P")
-                            .addOnSuccessListener(unused ->
-                                    Toast.makeText(getContext(), "Asistencia registrada", Toast.LENGTH_LONG).show()
-                            );
-                });
+        scanQRViewModel.procesarQR(qr);
     }
 
-    private boolean dentroDeLos10Min(String h) { return true; }
+    private void observeResults() {
+        scanQRViewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
+            if (message != null && !message.isEmpty()) {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
 
-    private String normalizar(String t) {
-        t = t.toLowerCase()
-                .replace(" ", "")
-                .replace("á", "a")
-                .replace("é", "e")
-                .replace("í", "i")
-                .replace("ó", "o")
-                .replace("ú", "u");
-
-        if (t.contains("programacionweb")) return "progweb";
-        if (t.contains("basededatos")) return "basedatos";
-        if (t.contains("matematicaaplicada")) return "matematica";
-        if (t.contains("redesycomunicaciones")) return "redes";
-
-        return t;
+        scanQRViewModel.getError().observe(getViewLifecycleOwner(), error -> {
+            if (error != null && !error.isEmpty()) {
+                Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

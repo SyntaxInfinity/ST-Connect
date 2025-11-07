@@ -9,20 +9,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.stconnect.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.*;
+import com.example.stconnect.data.model.Notificacion;
+import com.example.stconnect.ui.viewmodel.NotificacionesViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NotificacionesFragment extends Fragment {
 
     private NotificacionesAdapter adapter;
+    private NotificacionesViewModel notificacionesViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,32 +40,28 @@ public class NotificacionesFragment extends Fragment {
         adapter = new NotificacionesAdapter();
         rv.setAdapter(adapter);
 
-        cargarNotificaciones();
+        // Inicializar ViewModel
+        notificacionesViewModel = new ViewModelProvider(this).get(NotificacionesViewModel.class);
+        
+        // Observar notificaciones
+        observeNotificaciones();
+        
+        // Observar errores
+        observeErrors();
     }
 
-    private void cargarNotificaciones() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) return;
-
-        DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference("stconnect/notificaciones/" + user.getUid());
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Notificacion> lista = new ArrayList<>();
-
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Notificacion n = ds.getValue(Notificacion.class);
-                    if (n != null) lista.add(n);
-                }
-
-                adapter.setData(lista);
+    private void observeNotificaciones() {
+        notificacionesViewModel.getNotificaciones().observe(getViewLifecycleOwner(), notificaciones -> {
+            if (notificaciones != null) {
+                adapter.setData(notificaciones);
             }
+        });
+    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "Error al cargar notificaciones", Toast.LENGTH_SHORT).show();
+    private void observeErrors() {
+        notificacionesViewModel.getError().observe(getViewLifecycleOwner(), error -> {
+            if (error != null && !error.isEmpty()) {
+                Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
             }
         });
     }
