@@ -89,7 +89,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498">
 
-        <!-- Aquí puedes usar una foto o QR -->
         <ImageView
             android:id="@+id/fotoUsuario"
             android:layout_width="160dp"

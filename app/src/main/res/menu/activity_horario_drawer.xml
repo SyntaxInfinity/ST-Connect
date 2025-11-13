@@ -19,7 +19,7 @@
         <item
             android:id="@+id/nav_credencial"
             android:icon="@drawable/account_circle"
-            android:title="Credencial" />
+            android:title="Home" />
         <item
             android:id="@+id/nav_horario"
             android:icon="@drawable/baseline_calendar_month"

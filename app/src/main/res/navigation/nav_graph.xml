@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_credencial"
         android:name="com.example.stconnect.ui.profile.ProfileFragment"
-        android:label="Perfil"
+        android:label="Home"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/nav_horario"
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/nav_biblioteca"
         android:name="com.example.stconnect.ui.biblioteca.Biblioteca"
-        android:label="certificados"
+        android:label="Biblioteca"
         tools:layout="@layout/fragment_biblioteca" />
 
     <fragment
