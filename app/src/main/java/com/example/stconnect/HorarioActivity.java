@@ -137,9 +137,42 @@ public class HorarioActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.main_toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_home) {
+            navController.navigate(R.id.nav_credencial);
+            return true;
+        } else if (id == R.id.action_contact) {
+            mostrarpopup(findViewById(R.id.action_contact));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public void mostrarpopup(View v) {
-        FloatingActionButton fab = findViewById(R.id.btnservice);
-        PopupMenu pms = new PopupMenu(this, fab);
+        // View v can be null or the toolbar item view, but PopupMenu needs a non-null view anchor.
+        // If v is null or we want to anchor to the toolbar, we might need a reference to the toolbar or a specific view.
+        // For simplicity, let's try to use the toolbar itself if v is not suitable, or just the anchor passed.
+        // Since onOptionsItemSelected passes the view of the menu item (which might not be easily accessible as a View object directly from MenuItem),
+        // we might need a workaround. However, let's see.
+        // Actually, MenuItem is not a View.
+        // We can anchor the popup to the toolbar.
+        
+        View anchor = v;
+        if (anchor == null) {
+             anchor = findViewById(R.id.toolbar);
+        }
+
+        PopupMenu pms = new PopupMenu(this, anchor);
         getMenuInflater().inflate(R.menu.popup_ayuda, pms.getMenu());
 
         pms.setOnMenuItemClickListener(item -> {

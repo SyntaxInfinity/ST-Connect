@@ -17,10 +17,6 @@
             android:icon="@drawable/baseline_language"
             android:title="Aula virtual" />
         <item
-            android:id="@+id/nav_credencial"
-            android:icon="@drawable/account_circle"
-            android:title="Home" />
-        <item
             android:id="@+id/nav_horario"
             android:icon="@drawable/baseline_calendar_month"
             android:title="Horario" />

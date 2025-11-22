@@ -115,11 +115,11 @@
 
     <TextView
         android:id="@+id/profileGps"
-        android:layout_width="396dp"
-        android:layout_height="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
         android:gravity="center"
         android:text="Ubicación no disponible"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-9dp" />
+        tools:layout_editor_absoluteX="-25dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

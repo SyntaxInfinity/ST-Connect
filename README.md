@@ -1,4 +1,4 @@
-# ST-Connect
+s# ST-Connect
 
 **Tu Asistente ST** es una aplicación móvil diseñada para estudiantes de **Santo Tomás**, que permite acceder de manera rápida y organizada a información académica clave como horarios, calificaciones, evaluaciones y notificaciones. Esta app busca complementar el sistema institucional actual, facilitando el acceso y la organización del estudiante.  
 
