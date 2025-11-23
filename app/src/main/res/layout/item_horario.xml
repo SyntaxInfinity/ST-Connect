@@ -115,7 +115,6 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- Separador -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
