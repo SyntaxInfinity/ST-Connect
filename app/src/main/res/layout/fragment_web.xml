@@ -11,15 +11,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvTituloCalificaciones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="24dp"
-            android:paddingBottom="16dp"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
