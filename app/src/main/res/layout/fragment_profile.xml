@@ -10,53 +10,40 @@
     <ImageView
         android:id="@+id/profileImage"
         android:layout_width="110dp"
-        android:layout_height="103dp"
+        android:layout_height="110dp"
+        android:padding="5dp"
         android:layout_gravity="center_horizontal"
         android:contentDescription="Logo Santo Tomás"
         android:src="@drawable/logo_santo_tomas"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="6dp" />
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:layout_width="255dp"
         android:layout_height="112dp"
-        android:layout_marginTop="4dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <TextView
             android:id="@+id/profileName"
-            android:layout_width="220dp"
-            android:layout_height="54dp"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Nombre del Usuario"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.868"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.027" />
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/profileRut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RUT estudiante"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.704"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.081" />
+
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/profileCarrera"
@@ -64,13 +51,7 @@
             android:layout_height="wrap_content"
             android:text="Carrera usuario"
             android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.744"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.118" />
+            android:textSize="16sp" />
 
 
     </LinearLayout>
@@ -101,17 +82,16 @@
 
     <TextView
         android:id="@+id/profileEmail"
-        android:layout_width="356dp"
+        android:layout_width="match_parent"
         android:layout_height="24dp"
         android:text="usuario@correo.com"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186" />
+        app:layout_constraintVertical_bias="0.213" />
 
     <TextView
         android:id="@+id/profileGps"

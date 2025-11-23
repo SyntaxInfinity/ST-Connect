@@ -11,6 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Escanear Código QR"
+        android:textColor="@color/white"
+        android:backgroundTint="#0E796F"
         android:textSize="20sp"
         android:padding="12dp"/>
 

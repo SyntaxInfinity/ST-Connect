@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <TextView
@@ -31,8 +30,6 @@
         android:layout_width="307dp"
         android:layout_height="56dp"
         android:hint="Correo institucional"
-        android:textColor="@color/black"
-        android:textColorHint="@color/common_google_signin_btn_text_light"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,9 +43,7 @@
         android:layout_width="307dp"
         android:layout_height="53dp"
         android:hint="Contraseña"
-        android:textColorHint="@color/common_google_signin_btn_text_light"
         android:ems="10"
-        android:textColor="@color/black"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

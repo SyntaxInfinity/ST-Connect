@@ -42,7 +42,7 @@
     <Button
         android:id="@+id/btnCerrar"
         android:text="Cerrar"
-        android:backgroundTint="#224922"
+        android:backgroundTint="#0E796F"
         android:textColor="@android:color/white"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"

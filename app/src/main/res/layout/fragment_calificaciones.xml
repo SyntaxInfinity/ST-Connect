@@ -14,8 +14,7 @@
         android:paddingBottom="16dp"
         android:text="Calificaciones"
         android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="#1A3C20" />
+        android:textStyle="bold"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,14 +33,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="#69D58A">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:background="@drawable/side_nav_bar"
                     android:padding="20dp">
+
 
                     <TextView
                         android:id="@+id/asignatura1"
@@ -95,6 +95,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+
+                    android:background="@drawable/side_nav_bar"
                     android:padding="20dp">
 
                     <TextView
@@ -149,7 +151,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="@drawable/side_nav_bar">
 
                     <TextView
                         android:id="@+id/asignatura3"
@@ -203,7 +206,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="@drawable/side_nav_bar">
 
                     <TextView
                         android:id="@+id/asignatura4"
@@ -257,7 +261,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="@drawable/side_nav_bar">
 
                     <TextView
                         android:id="@+id/asignatura5"
@@ -311,7 +316,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="@drawable/side_nav_bar">
 
                     <TextView
                         android:id="@+id/asignatura6"
@@ -365,7 +371,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="@drawable/side_nav_bar">
 
                     <TextView
                         android:id="@+id/asignatura7"
@@ -419,7 +426,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="@drawable/side_nav_bar">
 
                     <TextView
                         android:id="@+id/asignatura8"
