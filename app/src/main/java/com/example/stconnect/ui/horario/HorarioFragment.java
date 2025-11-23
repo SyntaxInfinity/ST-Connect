@@ -115,6 +115,7 @@ public class HorarioFragment extends Fragment {
                     String sala = clase.child("sala").getValue(String.class);
                     String piso = String.valueOf(clase.child("piso").getValue());
                     String edificio = clase.child("edificio").getValue(String.class);
+                    String termino = clase.child("termino").getValue(String.class);
 
                     View fila = getLayoutInflater().inflate(R.layout.item_horario, layoutInterno, false);
 
@@ -124,8 +125,13 @@ public class HorarioFragment extends Fragment {
                     TextView tvPiso = fila.findViewById(R.id.tvPiso);
                     TextView tvEdificio = fila.findViewById(R.id.tvEdificio);
 
+                    if (termino != null && !termino.isEmpty()) {
+                        tvHora.setText(hora + " - " + termino);
+                    } else {
+                        tvHora.setText(hora);
+                    }
+
                     tvRamo.setText(ramo);
-                    tvHora.setText(hora);
                     tvSala.setText(sala);
                     tvPiso.setText(piso != null && !piso.equals("null") ? piso : "-");
                     tvEdificio.setText(edificio != null ? edificio : "-");
