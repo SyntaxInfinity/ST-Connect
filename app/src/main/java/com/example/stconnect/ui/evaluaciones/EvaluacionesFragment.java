@@ -83,48 +83,18 @@ public class EvaluacionesFragment extends Fragment {
     }
 
     private void agregarCardEvaluacion(String ramo, String fecha, String tipo, String peso) {
-        MaterialCardView card = new MaterialCardView(context);
-        card.setLayoutParams(new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
-        ((LinearLayout.LayoutParams) card.getLayoutParams()).setMargins(0, 0, 0, 24);
-        card.setCardElevation(6);
-        card.setRadius(18);
-        card.setUseCompatPadding(true);
+        View cardView = LayoutInflater.from(context).inflate(R.layout.item_evaluacion, contenedorEvaluaciones, false);
 
-        LinearLayout layoutInterno = new LinearLayout(context);
-        layoutInterno.setOrientation(LinearLayout.HORIZONTAL);
-        layoutInterno.setPadding(20, 20, 20, 20);
-        layoutInterno.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        TextView tvRamo = cardView.findViewById(R.id.tvRamo);
+        TextView tvFecha = cardView.findViewById(R.id.tvFecha);
 
-        TextView tvRamo = new TextView(context);
-        tvRamo.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         tvRamo.setText(ramo);
-        tvRamo.setTextSize(18);
-        tvRamo.setTypeface(null, android.graphics.Typeface.BOLD);
-        tvRamo.setTextColor(getResources().getColor(R.color.black));
-
-        TextView tvFecha = new TextView(context);
         tvFecha.setText(fecha);
-        tvFecha.setTextColor(getResources().getColor(android.R.color.darker_gray));
-        tvFecha.setPadding(0, 0, 20, 0);
 
-        Button btnDetalles = new Button(context);
-        btnDetalles.setText("DETALLES");
-        btnDetalles.setTextColor(getResources().getColor(android.R.color.white));
-        btnDetalles.setBackgroundTintList(context.getColorStateList(R.color.green_400));
-
-        layoutInterno.addView(tvRamo);
-        layoutInterno.addView(tvFecha);
-        layoutInterno.addView(btnDetalles);
-
-        card.addView(layoutInterno);
-        contenedorEvaluaciones.addView(card);
+        contenedorEvaluaciones.addView(cardView);
 
         View.OnClickListener listener = v -> mostrarDetallesDialog(ramo, tipo, peso, fecha);
-        btnDetalles.setOnClickListener(listener);
-        card.setOnClickListener(listener);
+        cardView.setOnClickListener(listener);
     }
 
     private void mostrarDetallesDialog(String ramo, String tipo, String peso, String fecha) {

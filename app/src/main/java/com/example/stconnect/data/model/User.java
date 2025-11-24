@@ -7,16 +7,21 @@ public class User {
     private String rut;
     private String carrera;
 
+    private String numero;
+
+
+
     public User() {
         // Constructor vacío requerido para Firebase
     }
 
-    public User(String uid, String nombre, String email, String rut, String carrera) {
+    public User(String uid, String nombre, String email, String rut, String carrera, String numero) {
         this.uid = uid;
         this.nombre = nombre;
         this.email = email;
         this.rut = rut;
         this.carrera = carrera;
+        this.numero = numero;
     }
 
     // Getters y Setters
@@ -59,5 +64,9 @@ public class User {
     public void setCarrera(String carrera) {
         this.carrera = carrera;
     }
+
+    public String getNumero() { return numero; }
+
+    public void setNumero(String numero) { this.numero = numero; }
 }
 

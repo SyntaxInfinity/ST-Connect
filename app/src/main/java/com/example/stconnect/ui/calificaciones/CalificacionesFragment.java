@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.stconnect.R;
-import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +26,7 @@ import java.util.List;
 
 public class CalificacionesFragment extends Fragment {
 
-    private final List<Calificacion> calificaciones = new ArrayList<>();
+    private LinearLayout contenedorCalificaciones;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -37,138 +37,117 @@ public class CalificacionesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cargarCalificaciones(view);
-
-        for (int i = 1; i <= 8; i++) {
-            int cardId = getResources().getIdentifier("card_asignatura_" + i, "id", requireContext().getPackageName());
-            int notaId = getResources().getIdentifier("nota" + i, "id", requireContext().getPackageName());
-            int tipoId = getResources().getIdentifier("tipo" + i, "id", requireContext().getPackageName());
-            int pesoId = getResources().getIdentifier("peso" + i, "id", requireContext().getPackageName());
-
-            MaterialCardView card = view.findViewById(cardId);
-            TextView nota = view.findViewById(notaId);
-            TextView tipo = view.findViewById(tipoId);
-            TextView peso = view.findViewById(pesoId);
-
-            if (card != null && nota != null && tipo != null && peso != null) {
-                nota.setVisibility(View.GONE);
-                tipo.setVisibility(View.GONE);
-                peso.setVisibility(View.GONE);
-
-                if (tipo.getText().toString().trim().isEmpty()) tipo.setText("Tipo: --");
-                if (peso.getText().toString().trim().isEmpty()) peso.setText("Peso: --");
-
-                card.setOnClickListener(v -> {
-                    boolean visible = nota.getVisibility() == View.VISIBLE;
-                    View[] detalles = {nota, tipo, peso};
-
-                    for (View d : detalles) {
-                        if (!visible) {
-                            d.setAlpha(0f);
-                            d.setVisibility(View.VISIBLE);
-                            d.animate()
-                                    .alpha(1f)
-                                    .translationYBy(10f)
-                                    .setDuration(250)
-                                    .start();
-                        } else {
-                            d.animate()
-                                    .alpha(0f)
-                                    .translationYBy(-10f)
-                                    .setDuration(200)
-                                    .withEndAction(() -> d.setVisibility(View.GONE))
-                                    .start();
-                        }
-                    }
-                });
-            }
-        }
+        contenedorCalificaciones = view.findViewById(R.id.contenedorCalificaciones);
+        cargarCalificaciones();
     }
 
-    private void cargarCalificaciones(View view) {
+    private void cargarCalificaciones() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         if (user == null) {
             Toast.makeText(getContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show();
             return;
         }
 
         String uid = user.getUid();
-
-        DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference("stconnect/calificaciones/" + uid);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("stconnect/calificaciones/" + uid);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                calificaciones.clear();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                contenedorCalificaciones.removeAllViews();
 
-                if (!snapshot.exists()) {
+                if (!dataSnapshot.exists()) {
                     Toast.makeText(getContext(), "No hay calificaciones disponibles", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    String ramo = ds.child("ramo").getValue(String.class);
-                    Double nota = ds.child("nota").getValue(Double.class);
-                    String tipo = ds.child("tipo").getValue(String.class);
-                    String peso = ds.child("peso").getValue(String.class);
+                for (DataSnapshot asignaturaSnapshot : dataSnapshot.getChildren()) {
+                    String ramo = asignaturaSnapshot.child("ramo").getValue(String.class);
+                    if (ramo == null) continue;
 
-                    if (ramo != null && nota != null && tipo != null && peso != null) {
-                        calificaciones.add(new Calificacion(ramo, nota, tipo, peso));
+                    List<Calificacion> notasAsignatura = new ArrayList<>();
+
+                    for (DataSnapshot notaSnapshot : asignaturaSnapshot.getChildren()) {
+                        if (notaSnapshot.getKey().equals("ramo")) continue;
+
+                        Double notaVal = null;
+                        Object notaObj = notaSnapshot.child("nota").getValue();
+                        if (notaObj instanceof Long) {
+                            notaVal = ((Long) notaObj).doubleValue();
+                        } else if (notaObj instanceof Double) {
+                            notaVal = (Double) notaObj;
+                        } else if (notaObj instanceof String) {
+                             try {
+                                 notaVal = Double.parseDouble((String) notaObj);
+                             } catch (NumberFormatException e) {
+                                 continue;
+                             }
+                        }
+
+                        String tipo = notaSnapshot.child("tipo").getValue(String.class);
+                        String peso = notaSnapshot.child("peso").getValue(String.class);
+
+                        if (notaVal != null) {
+                            notasAsignatura.add(new Calificacion(ramo, notaVal, tipo, peso));
+                        }
                     }
-                }
 
-                mostrarCalificaciones(view);
+                    agregarVistaAsignatura(ramo, notasAsignatura);
+                }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getContext(), "Error al leer la base de datos", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void mostrarCalificaciones(View view) {
-        int[] asignaturas = {
-                R.id.asignatura1, R.id.asignatura2, R.id.asignatura3, R.id.asignatura4,
-                R.id.asignatura5, R.id.asignatura6, R.id.asignatura7, R.id.asignatura8
-        };
+    private void agregarVistaAsignatura(String ramo, List<Calificacion> notas) {
+        if (getContext() == null) return;
 
-        int[] notas = {
-                R.id.nota1, R.id.nota2, R.id.nota3, R.id.nota4,
-                R.id.nota5, R.id.nota6, R.id.nota7, R.id.nota8
-        };
+        View asignaturaView = LayoutInflater.from(getContext()).inflate(R.layout.item_calificacion_asignatura, contenedorCalificaciones, false);
+        TextView tvAsignatura = asignaturaView.findViewById(R.id.tvAsignaturaNombre);
+        LinearLayout contenedorNotas = asignaturaView.findViewById(R.id.contenedorNotas);
 
-        int[] tipos = {
-                R.id.tipo1, R.id.tipo2, R.id.tipo3, R.id.tipo4,
-                R.id.tipo5, R.id.tipo6, R.id.tipo7, R.id.tipo8
-        };
+        tvAsignatura.setText(ramo);
 
-        int[] pesos = {
-                R.id.peso1, R.id.peso2, R.id.peso3, R.id.peso4,
-                R.id.peso5, R.id.peso6, R.id.peso7, R.id.peso8
-        };
+        // Ocultar notas inicialmente
+        contenedorNotas.setVisibility(View.GONE);
 
-        for (int i = 0; i < asignaturas.length; i++) {
-            TextView tvAsignatura = view.findViewById(asignaturas[i]);
-            TextView tvNota = view.findViewById(notas[i]);
-            TextView tvTipo = view.findViewById(tipos[i]);
-            TextView tvPeso = view.findViewById(pesos[i]);
+        for (Calificacion calificacion : notas) {
+            View notaView = LayoutInflater.from(getContext()).inflate(R.layout.item_nota_individual, contenedorNotas, false);
+            TextView tvNota = notaView.findViewById(R.id.tvNota);
+            TextView tvTipo = notaView.findViewById(R.id.tvTipo);
+            TextView tvPeso = notaView.findViewById(R.id.tvPeso);
 
-            if (i < calificaciones.size()) {
-                Calificacion c = calificaciones.get(i);
-                tvAsignatura.setText(c.getRamo());
-                tvNota.setText("Nota: " + c.getNota());
-                tvTipo.setText("Tipo: " + c.getTipo());
-                tvPeso.setText("Peso: " + c.getPeso());
-            } else {
-                tvAsignatura.setText("Asignatura " + (i + 1));
-                tvNota.setText("Nota: --");
-                tvTipo.setText("Tipo: --");
-                tvPeso.setText("Peso: --");
-            }
+            tvNota.setText("Nota: " + calificacion.getNota());
+            tvTipo.setText("Tipo: " + (calificacion.getTipo() != null ? calificacion.getTipo() : "--"));
+            tvPeso.setText("Peso: " + (calificacion.getPeso() != null ? calificacion.getPeso() : "--"));
+
+            contenedorNotas.addView(notaView);
         }
+
+        // Agregar listener para expandir/colapsar
+        asignaturaView.setOnClickListener(v -> {
+            boolean visible = contenedorNotas.getVisibility() == View.VISIBLE;
+            if (!visible) {
+                contenedorNotas.setAlpha(0f);
+                contenedorNotas.setVisibility(View.VISIBLE);
+                contenedorNotas.animate()
+                        .alpha(1f)
+                        .setDuration(250)
+                        .start();
+            } else {
+                contenedorNotas.animate()
+                        .alpha(0f)
+                        .setDuration(200)
+                        .withEndAction(() -> contenedorNotas.setVisibility(View.GONE))
+                        .start();
+            }
+        });
+
+        contenedorCalificaciones.addView(asignaturaView);
     }
 
     private static class Calificacion {

@@ -22,7 +22,7 @@ import com.example.stconnect.ui.viewmodel.ProfileViewModel;
 
 public class ProfileFragment extends Fragment {
 
-    private TextView profileName, profileEmail, profileGps, profileRut, profileCarrera;
+    private TextView profileName, profileEmail, profileGps, profileRut, profileCarrera, profileNumero;
     private ProfileViewModel profileViewModel;
     private static final int REQUEST_LOCATION_PERMISSION = 1001;
 
@@ -70,6 +70,7 @@ public class ProfileFragment extends Fragment {
         profileGps = view.findViewById(R.id.profileGps);
         profileRut = view.findViewById(R.id.profileRut);
         profileCarrera = view.findViewById(R.id.profileCarrera);
+        profileNumero = view.findViewById(R.id.numeroTelefono);
     }
 
     private void observeUserData() {
@@ -79,6 +80,7 @@ public class ProfileFragment extends Fragment {
                 profileEmail.setText(user.getEmail() != null ? user.getEmail() : "—");
                 profileRut.setText(user.getRut() != null ? user.getRut() : "—");
                 profileCarrera.setText(user.getCarrera() != null ? user.getCarrera() : "—");
+                profileNumero.setText(user.getNumero() != null ? user.getNumero() : "—");
             }
         });
     }
