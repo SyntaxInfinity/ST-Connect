@@ -6,14 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.stconnect.data.repository.AsistenciaRepository;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 public class ScanQRViewModel extends AndroidViewModel {
+
     private final AsistenciaRepository asistenciaRepository;
     private final MutableLiveData<String> messageLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
@@ -39,22 +37,27 @@ public class ScanQRViewModel extends AndroidViewModel {
             return;
         }
 
-        LiveData<AsistenciaRepository.AsistenciaResult> result = 
-            asistenciaRepository.registrarAsistencia(ramo, fecha, "");
+        LiveData<AsistenciaRepository.AsistenciaResult> result =
+                asistenciaRepository.registrarAsistencia(ramo, fecha, hora);
 
-        result.observeForever(asistenciaResult -> {
-            if (asistenciaResult != null) {
-                if (asistenciaResult.isSuccess()) {
-                    messageLiveData.setValue(asistenciaResult.getMessage());
-                } else if (asistenciaResult.getError() != null) {
-                    errorLiveData.setValue(asistenciaResult.getError());
+        Observer<AsistenciaRepository.AsistenciaResult> observer = new Observer<AsistenciaRepository.AsistenciaResult>() {
+            @Override
+            public void onChanged(AsistenciaRepository.AsistenciaResult asistenciaResult) {
+                if (asistenciaResult != null) {
+                    if (asistenciaResult.isSuccess()) {
+                        messageLiveData.setValue(asistenciaResult.getMessage());
+                    } else {
+                        errorLiveData.setValue(asistenciaResult.getError());
+                    }
                 }
+                result.removeObserver(this);
             }
-        });
+        };
+
+        result.observeForever(observer);
     }
 
     private boolean dentroDeLos10Min(String hora) {
-        // TODO: Implementar lógica de validación de horario
         return true;
     }
 
@@ -83,4 +86,3 @@ public class ScanQRViewModel extends AndroidViewModel {
         return errorLiveData;
     }
 }
-

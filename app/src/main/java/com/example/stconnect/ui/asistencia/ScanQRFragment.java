@@ -35,10 +35,8 @@ public class ScanQRFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_qr, container, false);
         
-        // Inicializar ViewModel
         scanQRViewModel = new ViewModelProvider(this).get(ScanQRViewModel.class);
         
-        // Observar mensajes y errores
         observeResults();
         
         view.findViewById(R.id.btnEscanear).setOnClickListener(v -> iniciarEscaneo());
