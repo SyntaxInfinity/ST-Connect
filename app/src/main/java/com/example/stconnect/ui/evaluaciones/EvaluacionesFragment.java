@@ -24,6 +24,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.example.stconnect.utils.NotificationScheduler;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import java.util.Locale;
 
 public class EvaluacionesFragment extends Fragment {
 
@@ -38,9 +52,30 @@ public class EvaluacionesFragment extends Fragment {
         contenedorEvaluaciones = view.findViewById(R.id.contenedorEvaluaciones);
         context = requireContext();
 
+        askNotificationPermission();
         cargarEvaluacionesDesdeFirebase();
 
         return view;
+    }
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // Permission granted
+                    Log.d("EvaluacionesFragment", "Notification permission granted");
+                } else {
+                    // Permission denied
+                    Log.w("EvaluacionesFragment", "Notification permission denied");
+                }
+            });
+
+    private void askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 
     private void cargarEvaluacionesDesdeFirebase() {
@@ -73,6 +108,7 @@ public class EvaluacionesFragment extends Fragment {
                     String hora = evaluacionSnap.child("hora").getValue(String.class);
 
                     agregarCardEvaluacion(ramo, fecha, tipo, peso, hora);
+                    programarNotificaciones(ramo, fecha, hora);
                 }
             }
 
@@ -112,5 +148,46 @@ public class EvaluacionesFragment extends Fragment {
 
         dialogView.findViewById(R.id.btnCerrar).setOnClickListener(v -> dialog.dismiss());
         dialog.show();
+    }
+    private void programarNotificaciones(String ramo, String fechaStr, String horaStr) {
+        if (fechaStr == null || horaStr == null) return;
+
+        // Formats: yyyy-MM-dd and HH:mm
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        try {
+            Date fechaEvaluacion = sdf.parse(fechaStr + " " + horaStr);
+            if (fechaEvaluacion == null) return;
+
+            long tiempoEvaluacion = fechaEvaluacion.getTime();
+            int uniqueId = (ramo + fechaStr + horaStr).hashCode();
+
+            // 3 days before
+            long tresDiasAntes = tiempoEvaluacion - (3 * 24 * 60 * 60 * 1000);
+            NotificationScheduler.scheduleNotification(
+                    context,
+                    "Evaluación Próxima: " + ramo,
+                    "Tienes una evaluación de " + ramo + " en 3 días.",
+                    tresDiasAntes,
+                    uniqueId + 1
+            );
+
+            // 3 hours before
+            long tresHorasAntes = tiempoEvaluacion - (3 * 60 * 60 * 1000);
+            NotificationScheduler.scheduleNotification(
+                    context,
+                    "Evaluación Inminente: " + ramo,
+                    "Tu evaluación de " + ramo + " es en 3 horas.",
+                    tresHorasAntes,
+                    uniqueId + 2
+            );
+            
+            Log.d("EvaluacionesFragment", "Scheduled for: " + ramo + " at " + fechaEvaluacion.toString());
+            
+            // Optional: Toast for debugging/verification (can be removed later)
+            // android.widget.Toast.makeText(context, "Alarma programada para " + ramo, android.widget.Toast.LENGTH_SHORT).show();
+
+        } catch (ParseException e) {
+            Log.e("EvaluacionesFragment", "Error parsing date/time for: " + ramo + " | " + fechaStr + " " + horaStr, e);
+        }
     }
 }
