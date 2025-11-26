@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.stconnect.ui.viewmodel.LoginViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.TxtEmail);
         etPass = findViewById(R.id.TxtPassword);
         btnlogin = findViewById(R.id.btnLogin);
+
+        // Verificar si el usuario ya está logueado
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            irAMain();
+            return;
+        }
         
         // Inicializar ViewModel
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);

@@ -203,8 +203,15 @@ public class HorarioActivity extends AppCompatActivity {
     }
 
     public void Logout(View v){
+        // 1. Cerrar sesión en Firebase
+        FirebaseAuth.getInstance().signOut();
+
+        // 2. Limpiar SharedPreferences (opcional pero recomendado)
+        getSharedPreferences("Usuario", MODE_PRIVATE).edit().clear().apply();
+
+        // 3. Redirigir al Login (MainActivity)
         Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
