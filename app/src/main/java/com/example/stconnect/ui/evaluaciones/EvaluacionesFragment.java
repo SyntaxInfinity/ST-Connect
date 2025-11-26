@@ -70,8 +70,9 @@ public class EvaluacionesFragment extends Fragment {
                     String fecha = evaluacionSnap.child("fecha").getValue(String.class);
                     String tipo = evaluacionSnap.child("tipo").getValue(String.class);
                     String peso = evaluacionSnap.child("peso").getValue(String.class);
+                    String hora = evaluacionSnap.child("hora").getValue(String.class);
 
-                    agregarCardEvaluacion(ramo, fecha, tipo, peso);
+                    agregarCardEvaluacion(ramo, fecha, tipo, peso, hora);
                 }
             }
 
@@ -82,7 +83,7 @@ public class EvaluacionesFragment extends Fragment {
         });
     }
 
-    private void agregarCardEvaluacion(String ramo, String fecha, String tipo, String peso) {
+    private void agregarCardEvaluacion(String ramo, String fecha, String tipo, String peso, String hora) {
         View cardView = LayoutInflater.from(context).inflate(R.layout.item_evaluacion, contenedorEvaluaciones, false);
 
         TextView tvRamo = cardView.findViewById(R.id.tvRamo);
@@ -93,11 +94,11 @@ public class EvaluacionesFragment extends Fragment {
 
         contenedorEvaluaciones.addView(cardView);
 
-        View.OnClickListener listener = v -> mostrarDetallesDialog(ramo, tipo, peso, fecha);
+        View.OnClickListener listener = v -> mostrarDetallesDialog(ramo, tipo, peso, fecha, hora);
         cardView.setOnClickListener(listener);
     }
 
-    private void mostrarDetallesDialog(String ramo, String tipo, String peso, String fecha) {
+    private void mostrarDetallesDialog(String ramo, String tipo, String peso, String fecha, String hora) {
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_detalles_evaluaciones, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(dialogView);
@@ -106,6 +107,7 @@ public class EvaluacionesFragment extends Fragment {
         ((TextView) dialogView.findViewById(R.id.txtPrueba)).setText("Asignatura: " + ramo);
         ((TextView) dialogView.findViewById(R.id.txtProfesor)).setText("Tipo: " + tipo);
         ((TextView) dialogView.findViewById(R.id.txtSala)).setText("Fecha: " + fecha);
+        ((TextView) dialogView.findViewById(R.id.txtHora)).setText("Hora: " + hora);
         ((TextView) dialogView.findViewById(R.id.Txttemario)).setText("Peso: " + peso);
 
         dialogView.findViewById(R.id.btnCerrar).setOnClickListener(v -> dialog.dismiss());
