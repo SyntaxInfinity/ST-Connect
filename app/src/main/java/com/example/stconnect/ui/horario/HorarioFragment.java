@@ -67,6 +67,15 @@ public class HorarioFragment extends Fragment {
             String diaSemana = obtenerDiaDeFecha(year, month, dayOfMonth);
             cargarClasesDelDia(diaSemana, fechaSeleccionada);
         });
+
+        // Cargar clases del día actual al iniciar
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        int year = cal.get(java.util.Calendar.YEAR);
+        int month = cal.get(java.util.Calendar.MONTH);
+        int day = cal.get(java.util.Calendar.DAY_OF_MONTH);
+        String fechaHoy = day + "/" + (month + 1) + "/" + year;
+        String diaHoy = obtenerDiaDeFecha(year, month, day);
+        cargarClasesDelDia(diaHoy, fechaHoy);
     }
 
     private void cargarClasesDelDia(String dia, String fecha) {
