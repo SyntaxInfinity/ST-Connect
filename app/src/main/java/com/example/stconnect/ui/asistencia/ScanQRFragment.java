@@ -51,6 +51,7 @@ public class ScanQRFragment extends Fragment {
     }
 
     private void procesarQR(String qr) {
+        com.example.stconnect.utils.Logger.logAction("Escaneo QR: " + qr);
         scanQRViewModel.procesarQR(qr);
     }
 

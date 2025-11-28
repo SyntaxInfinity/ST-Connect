@@ -33,5 +33,10 @@
             android:id="@+id/nav_qr"
             android:icon="@drawable/outline_barcode_scanner"
             android:title="Asistencia QR" />
+        
+        <item
+            android:id="@+id/nav_logs"
+            android:icon="@drawable/baseline_assignment"
+            android:title="Registros de Actividad" />
     </group>
 </menu>

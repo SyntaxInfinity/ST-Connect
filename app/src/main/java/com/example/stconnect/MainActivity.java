@@ -93,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences prefs = getSharedPreferences("Usuario", MODE_PRIVATE);
                 prefs.edit().putString("uid", authResult.getUid()).apply();
                 
+                // Registrar log
+                com.example.stconnect.utils.Logger.logAction("Inicio de sesión");
+                
                 Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
                 irAMain();
             } else if (authResult.getError() != null) {

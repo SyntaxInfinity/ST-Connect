@@ -57,13 +57,22 @@ public class HorarioActivity extends AppCompatActivity {
                 R.id.nav_web,
                 R.id.nav_biblioteca,
                 R.id.nav_notificaciones,
-                R.id.nav_credencial
+                R.id.nav_notificaciones,
+                R.id.nav_credencial,
+                R.id.nav_logs
         )
                 .setOpenableLayout(drawer)
                 .build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            CharSequence label = destination.getLabel();
+            if (label != null && !label.toString().isEmpty()) {
+                com.example.stconnect.utils.Logger.logAction("Navegación a: " + label);
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(item -> {
             drawer.closeDrawer(GravityCompat.START);
@@ -128,7 +137,32 @@ public class HorarioActivity extends AppCompatActivity {
             navController.navigate(R.id.nav_notificaciones);
         } else if (itemId == R.id.nav_credencial) {
             navController.navigate(R.id.nav_credencial);
+        } else if (itemId == R.id.nav_logs) {
+            mostrarDialogoPin();
         }
+    }
+
+    private void mostrarDialogoPin() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Acceso Restringido");
+        builder.setMessage("Ingrese el código de seguridad:");
+
+        final android.widget.EditText input = new android.widget.EditText(this);
+        input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        builder.setView(input);
+
+        builder.setPositiveButton("Acceder", (dialog, which) -> {
+            String pin = input.getText().toString();
+            if ("123456".equals(pin)) {
+                navController.navigate(R.id.nav_logs_fragment);
+            } else {
+                Toast.makeText(HorarioActivity.this, "Código incorrecto", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+
+        builder.show();
     }
 
     @Override
@@ -203,6 +237,8 @@ public class HorarioActivity extends AppCompatActivity {
     }
 
     public void Logout(View v){
+        com.example.stconnect.utils.Logger.logAction("Cierre de sesión");
+
         // 1. Cerrar sesión en Firebase
         FirebaseAuth.getInstance().signOut();
 

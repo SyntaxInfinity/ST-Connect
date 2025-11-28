@@ -54,6 +54,10 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    
+    // Explicit dependencies to prevent runtime crashes
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.cardview:cardview:1.0.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

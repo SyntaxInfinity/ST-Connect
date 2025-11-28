@@ -50,4 +50,10 @@
         android:name="com.example.stconnect.ui.asistencia.ScanQRFragment"
         android:label="Marcar Asistencia"/>
 
+    <fragment
+        android:id="@+id/nav_logs_fragment"
+        android:name="com.example.stconnect.ui.logs.LogsFragment"
+        android:label="Registros de Actividad"
+        tools:layout="@layout/fragment_logs" />
+
 </navigation>
