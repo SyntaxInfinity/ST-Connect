@@ -71,6 +71,18 @@ public class ProfileFragment extends Fragment {
         profileRut = view.findViewById(R.id.profileRut);
         profileCarrera = view.findViewById(R.id.profileCarrera);
         profileNumero = view.findViewById(R.id.numeroTelefono);
+        
+        // Configurar Slider
+        androidx.viewpager2.widget.ViewPager2 viewPager = view.findViewById(R.id.viewPagerSlider);
+        java.util.List<String> images = new java.util.ArrayList<>();
+        images.add("https://i.imgur.com/czoGMaJ.jpeg");
+        images.add("https://i.imgur.com/skUq6BF.jpeg");
+        images.add("https://i.imgur.com/uAlSeiE.jpeg");
+        images.add("https://i.imgur.com/nP9skQV.jpeg");
+        images.add("https://i.imgur.com/29FS9TJ.jpeg");
+        
+        SliderAdapter adapter = new SliderAdapter(images);
+        viewPager.setAdapter(adapter);
     }
 
     private void observeUserData() {
